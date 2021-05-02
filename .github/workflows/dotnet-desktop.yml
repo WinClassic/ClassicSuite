@@ -22,4 +22,4 @@ jobs:
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v2.2.3
       with:
-        path: 'bin\Release'
+        path: './Craftplacer.ClassicSuite.Wizards/bin/Release'
