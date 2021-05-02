@@ -71,13 +71,12 @@ namespace Craftplacer.ClassicSuite.Wizards.Forms
 
             page.BringToFront();
 
+            // Update graphics
             UpdateSidebar(page);
             UpdateHeader(page);
 
             // Update buttons
-            UpdateBackButton();
-            UpdateNextButton();
-            UpdateCancelButton();
+            UpdateButtons();
 
             // Subscribe to events
             page.AllowedButtonsChanged += Page_AllowedButtonsChanged;
@@ -156,19 +155,16 @@ namespace Craftplacer.ClassicSuite.Wizards.Forms
 
         #region Page Events
 
-        private void CurrentPage_CanBackChanged(object sender, EventArgs e)
-        {
-            UpdateBackButton();
-        }
-
-        private void CurrentPage_CanCancelChanged(object sender, EventArgs e)
-        {
-            UpdateCancelButton();
-        }
-
         private void Page_AllowedButtonsChanged(object sender, EventArgs e)
         {
+            UpdateButtons();
+        }
+
+        private void UpdateButtons()
+        {
+            UpdateBackButton();
             UpdateNextButton();
+            UpdateCancelButton();
         }
 
         private void Page_NextPageRequested(object sender, EventArgs e)
