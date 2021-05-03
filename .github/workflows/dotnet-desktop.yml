@@ -12,7 +12,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     
-    - name: setup-msbuild
+    - name: Setup MSBuild
       uses: microsoft/setup-msbuild@v1
 
     - name: Build
@@ -23,13 +23,14 @@ jobs:
       uses: actions/upload-artifact@v2.2.3
       with:
         path: './Craftplacer.ClassicSuite.Wizards/bin/Release'
-  deploy:
-    - uses: nuget/setup-nuget@v1
+ 
+    - name: Setup NuGet
+      uses: nuget/setup-nuget@v1
       with:
         nuget-api-key: ${{ secrets.NuGetAPIKey }}
         nuget-version: '5.x'
 
-    - name: Restore NuGet
+    - name: Restore
       run: nuget restore 'Craftplacer.ClassicSuite.sln'
       
     - name: Pack
@@ -37,4 +38,3 @@ jobs:
     
     - name: Push
       run: nuget push Craftplacer.ClassicSuite.Wizards.*.nupkg ${{ secrets.NuGetAPIKey }} -Source https://api.nuget.org/v3/index.json
-      
