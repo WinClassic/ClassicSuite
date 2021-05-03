@@ -23,3 +23,18 @@ jobs:
       uses: actions/upload-artifact@v2.2.3
       with:
         path: './Craftplacer.ClassicSuite.Wizards/bin/Release'
+  deploy:
+    - uses: nuget/setup-nuget@v1
+      with:
+        nuget-api-key: ${{ secrets.NuGetAPIKey }}
+        nuget-version: '5.x'
+
+    - name: Restore NuGet
+      run: nuget restore 'Craftplacer.ClassicSuite.sln'
+      
+    - name: Pack
+      run: nuget pack './Craftplacer.ClassicSuite.Wizards/Craftplacer.ClassicSuite.Wizards.nuspec'
+    
+    - name: Push
+      run: nuget push Craftplacer.ClassicSuite.Wizards.*.nupkg ${{ secrets.NuGetAPIKey }} -Source https://api.nuget.org/v3/index.json
+      

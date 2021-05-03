@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package >
+  <metadata>
+    <id>Craftplacer.ClassicSuite.Wizards</id>
+    <version>1.2.0.0</version>
+    <title>Craftplacer.ClassicSuite.Wizards</title>
+    <authors>Craftplacer</authors>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <license type="expression">GPL-3.0-only</license>
+    <projectUrl>https://github.com/Craftplacer/ClassicSuite/</projectUrl>
+    <description>A fully-featured lightweight wizards implementation for WinForms.</description>
+    <copyright>Copyright © Craftplacer 2021</copyright>
+    <tags>winforms wizards</tags>
+  </metadata>
+</package>
