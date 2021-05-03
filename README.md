@@ -2,7 +2,7 @@
  
 Projects related to backports of legacy Windows stuff.
 
-# ClassicSuite.Wizards ![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/Craftplacer/ClassicSuite/.NET/main)
+# ClassicSuite.Wizards ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/Craftplacer/ClassicSuite/Wizards/main) ![NuGet](https://img.shields.io/nuget/v/Craftplacer.ClassicSuite.Wizards)
 
 A fully-featured lightweight wizards implementation for WinForms.
 
