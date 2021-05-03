@@ -20,9 +20,9 @@ namespace Craftplacer.ClassicSuite.Wizards.Example
 
             var wizard = WizardForm.FromList(new WizardPage[]
             {
-    new StartPage(),
-    new FirstPage(),
-    new SecondPage(),
+                new StartPage(),
+                new FirstPage(),
+                new SecondPage(),
             });
 
             wizard.DefaultSidebarImage = Properties.Resources.sidebar;
