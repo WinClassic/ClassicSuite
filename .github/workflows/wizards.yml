@@ -17,9 +17,10 @@ jobs:
       run: msbuild -noLogo -p:Configuration=Release
       working-directory: ./Craftplacer.ClassicSuite.Wizards/
       
-    - name: Upload a Build Artifact
+    - name: Upload build artifacts
       uses: actions/upload-artifact@v2.2.3
       with:
+        name: binaries
         path: './Craftplacer.ClassicSuite.Wizards/bin/Release'
  
     - name: Setup NuGet
@@ -33,6 +34,12 @@ jobs:
       
     - name: Pack
       run: nuget pack './Craftplacer.ClassicSuite.Wizards/Craftplacer.ClassicSuite.Wizards.nuspec'
+      
+    - name: Upload NuGet package as artifact
+      uses: actions/upload-artifact@v2.2.3
+      with:
+        name: nuget
+        path: './Craftplacer.ClassicSuite.Wizards.*.nupkg'
     
     - name: Push
-      run: nuget push Craftplacer.ClassicSuite.Wizards.*.nupkg ${{ secrets.NuGetAPIKey }} -Source https://api.nuget.org/v3/index.json
+      run: nuget push Craftplacer.ClassicSuite.Wizards.*.nupkg ${{ secrets.NuGetAPIKey }} -Source https://api.nuget.org/v3/index.json -SkipDuplicate
