@@ -11,5 +11,9 @@
     <description>A fully-featured lightweight wizards implementation for WinForms.</description>
     <copyright>Copyright © Craftplacer 2021</copyright>
     <tags>winforms wizards</tags>
+    <icon>images\Wizard.png</icon>
   </metadata>
+  <files>
+    <file src="Resources\Wizard.png" target="images\" />
+  </files>
 </package>

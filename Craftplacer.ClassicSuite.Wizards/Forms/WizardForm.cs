@@ -30,6 +30,7 @@ namespace Craftplacer.ClassicSuite.Wizards.Forms
         public WizardForm(WizardPage initialPage)
         {
             InitializeComponent();
+            Icon = Properties.Resources.Wizard;
             this.initialPage = initialPage;
         }
 

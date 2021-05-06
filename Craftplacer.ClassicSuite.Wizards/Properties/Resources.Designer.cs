@@ -95,5 +95,15 @@ namespace Craftplacer.ClassicSuite.Wizards.Properties {
                 return ResourceManager.GetString("Next", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
+        internal static System.Drawing.Icon Wizard {
+            get {
+                object obj = ResourceManager.GetObject("Wizard", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
     }
 }
