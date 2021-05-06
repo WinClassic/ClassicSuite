@@ -2,9 +2,9 @@
  
 Projects related to backports of legacy Windows stuff.
 
-# ClassicSuite.Wizards ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/Craftplacer/ClassicSuite/Wizards/main) ![NuGet](https://img.shields.io/nuget/v/Craftplacer.ClassicSuite.Wizards)
+# ![Project icon](https://raw.githubusercontent.com/Craftplacer/ClassicSuite/main/Craftplacer.ClassicSuite.Wizards/Resources/Wizard.ico) ClassicSuite.Wizards ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/Craftplacer/ClassicSuite/Wizards/main) ![NuGet](https://img.shields.io/nuget/v/Craftplacer.ClassicSuite.Wizards)
 
-A fully-featured lightweight wizards implementation for WinForms.
+A fully-featured lightweight wizards implementation for WinForms. Check out the wiki [here](https://github.com/Craftplacer/ClassicSuite/wiki/Getting-Started-with-Wizards) for on how to get started.
 
 | `PageParts.Sidebar` | `PageParts.Header` |
 | - | - |
