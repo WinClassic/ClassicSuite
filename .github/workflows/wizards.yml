@@ -3,6 +3,8 @@ name: Wizards
 on:
   push:
     branches: [ main ]
+    paths:
+      - 'Craftplacer.ClassicSuite.Wizards/**'
 
 jobs:
   build:
