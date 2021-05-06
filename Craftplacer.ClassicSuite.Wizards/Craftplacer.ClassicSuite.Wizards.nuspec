@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<package >
+<package>
   <metadata>
     <id>Craftplacer.ClassicSuite.Wizards</id>
     <version>1.2.1.0</version>
-    <title>Craftplacer.ClassicSuite.Wizards</title>
+    <title>ClassicSuite Wizards</title>
     <authors>Craftplacer</authors>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <license type="expression">GPL-3.0-only</license>
@@ -12,8 +12,11 @@
     <copyright>Copyright © Craftplacer 2021</copyright>
     <tags>winforms wizards</tags>
     <icon>images\Wizard.png</icon>
+    <repository type="git" url="https://github.com/Craftplacer/ClassicSuite.git" branch="main" />
   </metadata>
   <files>
     <file src="Resources\Wizard.png" target="images\" />
+    <file src="bin\Release\*.dll" target="lib" />
+    <file src="bin\Release\*.pdb" target="lib" />
   </files>
 </package>
