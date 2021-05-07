@@ -13,7 +13,7 @@ namespace Craftplacer.ClassicSuite.Wizards.Pages
         public override DockStyle Dock => DockStyle.Fill;
 
         /// <summary>
-        /// The icon that will be displayed in the header.
+        /// The image that will be displayed in the header.
         /// </summary>
         [Category("Appearance")]
         public Image HeaderImage { get; set; }
@@ -69,8 +69,13 @@ namespace Craftplacer.ClassicSuite.Wizards.Pages
             }
         }
 
+        /// <summary>
+        /// The image that will be displayed in the sidebar.
+        /// </summary>
         [Category("Appearance")]
         public Image SidebarImage { get; set; }
+
+        #region Next Page
 
         /// <summary>
         /// The next page that will be displayed when the user clicks the next button. If set to <see cref="null"/>, the next button will be set to "Finish" and will cause the wizard to close.
@@ -91,6 +96,8 @@ namespace Craftplacer.ClassicSuite.Wizards.Pages
         {
             NextPageRequested?.Invoke(this, EventArgs.Empty);
         }
+
+        #endregion Next Page
 
         #region Navigation Events
 
