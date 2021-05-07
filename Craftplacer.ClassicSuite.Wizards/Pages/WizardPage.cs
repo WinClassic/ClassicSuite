@@ -13,16 +13,21 @@ namespace Craftplacer.ClassicSuite.Wizards.Pages
         public override DockStyle Dock => DockStyle.Fill;
 
         /// <summary>
-        /// The image that will be displayed in the header.
+        /// The title that appears in the header.
         /// </summary>
         [Category("Appearance")]
-        public Image HeaderImage { get; set; }
-
-        [Category("Appearance")]
+        [Description("The title that appears in the header.")]
         public virtual string Title { get; set; }
 
+        /// <summary>
+        /// The subtitle that appears under the title in the header.
+        /// </summary>
         [Category("Appearance")]
+        [Description("The subtitle that appears under the title in the header.")]
         public virtual string Subtitle { get; set; }
+
+        // This will intentionally break code if pages are put into wrong Forms.
+        public new WizardForm ParentForm => (WizardForm)base.ParentForm;
 
         #region Button Texts
 
@@ -82,10 +87,9 @@ namespace Craftplacer.ClassicSuite.Wizards.Pages
 
         #endregion Button Texts
 
-        private PageParts pageParts = PageParts.None;
+        #region Page Parts
 
-        // This will intentionally break code if pages are put into wrong Forms.
-        public new WizardForm ParentForm => (WizardForm)base.ParentForm;
+        private PageParts pageParts = PageParts.None;
 
         /// <summary>
         /// What extra parts to show, this can range from sidebar imagery to a small header displaying the title.
@@ -104,10 +108,18 @@ namespace Craftplacer.ClassicSuite.Wizards.Pages
         }
 
         /// <summary>
+        /// The image that will be displayed in the header.
+        /// </summary>
+        [Category("Appearance")]
+        public Image HeaderImage { get; set; }
+
+        /// <summary>
         /// The image that will be displayed in the sidebar.
         /// </summary>
         [Category("Appearance")]
         public Image SidebarImage { get; set; }
+
+        #endregion Page Parts
 
         #region Next Page
 
