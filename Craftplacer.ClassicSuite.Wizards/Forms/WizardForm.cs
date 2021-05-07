@@ -81,6 +81,7 @@ namespace Craftplacer.ClassicSuite.Wizards.Forms
 
             // Subscribe to events
             page.AllowedButtonsChanged += Page_AllowedButtonsChanged;
+            page.ButtonTextChanged += Page_ButtonTextChanged;
             page.NextPageRequested += Page_NextPageRequested;
 
             // Inform this page about the focus switch
@@ -97,6 +98,7 @@ namespace Craftplacer.ClassicSuite.Wizards.Forms
 
             // Unsubscribe from button changes from previous page
             page.AllowedButtonsChanged -= Page_AllowedButtonsChanged;
+            page.ButtonTextChanged -= Page_ButtonTextChanged;
             page.NextPageRequested -= Page_NextPageRequested;
         }
 
@@ -157,6 +159,11 @@ namespace Craftplacer.ClassicSuite.Wizards.Forms
         #region Page Events
 
         private void Page_AllowedButtonsChanged(object sender, EventArgs e)
+        {
+            UpdateButtons();
+        }
+
+        private void Page_ButtonTextChanged(object sender, EventArgs e)
         {
             UpdateButtons();
         }

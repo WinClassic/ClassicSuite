@@ -24,13 +24,23 @@ namespace Craftplacer.ClassicSuite.Wizards.Pages
         [Category("Appearance")]
         public virtual string Subtitle { get; set; }
 
+        #region Button Texts
+
         /// <summary>
         /// Text displayed on the back button of the wizard. If empty, it will display the default text.
         /// </summary>
         [Category("Appearance")]
         [DefaultValue(null)]
         [Description("Text displayed on the back button of the wizard. If empty, it will display the default text.")]
-        public virtual string BackButtonText { get; set; }
+        public virtual string BackButtonText
+        {
+            get => backButtonText;
+            set
+            {
+                backButtonText = value;
+                ButtonTextChanged?.Invoke(this, EventArgs.Empty);
+            }
+        }
 
         /// <summary>
         /// Text displayed on the next button of the wizard. If empty, it will display the default text.
@@ -38,7 +48,15 @@ namespace Craftplacer.ClassicSuite.Wizards.Pages
         [Category("Appearance")]
         [DefaultValue(null)]
         [Description("Text displayed on the next button of the wizard. If empty, it will display the default text.")]
-        public virtual string NextButtonText { get; set; }
+        public virtual string NextButtonText
+        {
+            get => nextButtonText;
+            set
+            {
+                nextButtonText = value;
+                ButtonTextChanged?.Invoke(this, EventArgs.Empty);
+            }
+        }
 
         /// <summary>
         /// Text displayed on the cancel button of the wizard. If empty, it will display the default text.
@@ -46,7 +64,23 @@ namespace Craftplacer.ClassicSuite.Wizards.Pages
         [Category("Appearance")]
         [DefaultValue(null)]
         [Description("Text displayed on the cancel button of the wizard. If empty, it will display the default text.")]
-        public virtual string CancelButtonText { get; set; }
+        public virtual string CancelButtonText
+        {
+            get => cancelButtonText;
+            set
+            {
+                cancelButtonText = value;
+                ButtonTextChanged?.Invoke(this, EventArgs.Empty);
+            }
+        }
+
+        private string cancelButtonText;
+        private string nextButtonText;
+        private string backButtonText;
+
+        public event EventHandler<EventArgs> ButtonTextChanged;
+
+        #endregion Button Texts
 
         private PageParts pageParts = PageParts.None;
 
