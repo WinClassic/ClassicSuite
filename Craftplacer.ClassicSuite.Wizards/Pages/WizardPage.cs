@@ -26,6 +26,13 @@ namespace Craftplacer.ClassicSuite.Wizards.Pages
         [Description("The subtitle that appears under the title in the header.")]
         public virtual string Subtitle { get; set; }
 
+        /// <summary>
+        /// The text that appears in the footer beside the buttons.
+        /// </summary>
+        [Category("Appearance")]
+        [Description("The text that appears in the footer beside the buttons.")]
+        public virtual string FooterText { get; set; }
+
         // This will intentionally break code if pages are put into wrong Forms.
         public new WizardForm ParentForm => (WizardForm)base.ParentForm;
 

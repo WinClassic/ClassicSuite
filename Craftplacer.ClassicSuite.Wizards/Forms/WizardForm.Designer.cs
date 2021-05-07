@@ -37,6 +37,7 @@ namespace Craftplacer.ClassicSuite.Wizards.Forms
             this.header = new Craftplacer.ClassicSuite.Wizards.Controls.PageHeader();
             this.divider = new Craftplacer.ClassicSuite.Wizards.Controls.Divider();
             this.sidebarPictureBox = new System.Windows.Forms.PictureBox();
+            this.footerLabel = new System.Windows.Forms.Label();
             this.buttonFlowPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.sidebarPictureBox)).BeginInit();
             this.SuspendLayout();
@@ -46,6 +47,7 @@ namespace Craftplacer.ClassicSuite.Wizards.Forms
             this.buttonFlowPanel.Controls.Add(this.cancelButton);
             this.buttonFlowPanel.Controls.Add(this.nextButton);
             this.buttonFlowPanel.Controls.Add(this.backButton);
+            this.buttonFlowPanel.Controls.Add(this.footerLabel);
             this.buttonFlowPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.buttonFlowPanel.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
             this.buttonFlowPanel.Location = new System.Drawing.Point(0, 315);
@@ -53,6 +55,7 @@ namespace Craftplacer.ClassicSuite.Wizards.Forms
             this.buttonFlowPanel.Padding = new System.Windows.Forms.Padding(0, 12, 10, 5);
             this.buttonFlowPanel.Size = new System.Drawing.Size(497, 45);
             this.buttonFlowPanel.TabIndex = 0;
+            this.buttonFlowPanel.WrapContents = false;
             // 
             // cancelButton
             // 
@@ -130,6 +133,15 @@ namespace Craftplacer.ClassicSuite.Wizards.Forms
             this.sidebarPictureBox.TabIndex = 4;
             this.sidebarPictureBox.TabStop = false;
             // 
+            // footerText
+            // 
+            this.footerLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.footerLabel.Location = new System.Drawing.Point(9, 12);
+            this.footerLabel.Name = "footerText";
+            this.footerLabel.Size = new System.Drawing.Size(240, 23);
+            this.footerLabel.TabIndex = 3;
+            this.footerLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // WizardForm
             // 
             this.AcceptButton = this.nextButton;
@@ -167,5 +179,6 @@ namespace Craftplacer.ClassicSuite.Wizards.Forms
         private System.Windows.Forms.Panel pagePanel;
         private Controls.PageHeader header;
         private System.Windows.Forms.PictureBox sidebarPictureBox;
+        private System.Windows.Forms.Label footerLabel;
     }
 }

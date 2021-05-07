@@ -76,6 +76,8 @@ namespace Craftplacer.ClassicSuite.Wizards.Forms
             UpdateSidebar(page);
             UpdateHeader(page);
 
+            footerLabel.Text = page.FooterText ?? string.Empty;
+
             // Update buttons
             UpdateButtons();
 
