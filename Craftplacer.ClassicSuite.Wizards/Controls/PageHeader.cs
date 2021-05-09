@@ -5,16 +5,9 @@ namespace Craftplacer.ClassicSuite.Wizards.Controls
 {
     public partial class PageHeader : UserControl
     {
-        public string Title
+        public PageHeader()
         {
-            get => titleLabel.Text;
-            set => titleLabel.Text = value;
-        }
-
-        public string Subtitle
-        {
-            get => subtitleLabel.Text;
-            set => subtitleLabel.Text = value;
+            InitializeComponent();
         }
 
         public Image Image
@@ -23,9 +16,16 @@ namespace Craftplacer.ClassicSuite.Wizards.Controls
             set => pictureBox.Image = value;
         }
 
-        public PageHeader()
+        public string Subtitle
         {
-            InitializeComponent();
+            get => subtitleLabel.Text;
+            set => subtitleLabel.Text = value;
+        }
+
+        public string Title
+        {
+            get => titleLabel.Text;
+            set => titleLabel.Text = value;
         }
 
         private void PageHeader_SizeChanged(object sender, System.EventArgs e)
