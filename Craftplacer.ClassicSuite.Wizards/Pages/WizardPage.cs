@@ -176,6 +176,20 @@ namespace Craftplacer.ClassicSuite.Wizards.Pages
 
         #endregion Navigation Events
 
+        #region Cancellation
+
+        /// <summary>
+        /// Occurs when the parent WizardForm tries to cancel the wizard process.
+        /// </summary>
+        public event CancelEventHandler CancellationRequested;
+
+        public void OnCancelRequested(CancelEventArgs e)
+        {
+            CancellationRequested?.Invoke(this, e);
+        }
+
+        #endregion
+
         #region Buttons
 
         /// <summary>
