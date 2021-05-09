@@ -107,7 +107,7 @@ namespace Craftplacer.ClassicSuite.Wizards.Forms
         /// <summary>
         /// Navigates to the next page, this is equivalent to pressing the "Next" button.
         /// </summary>
-        private void NavigateToNextPage()
+        private void NavigateForwards()
         {
             Debug.WriteLine("Navigating to next page", "Wizard");
             var nextPage = LastPage.NextPage;
@@ -180,7 +180,7 @@ namespace Craftplacer.ClassicSuite.Wizards.Forms
         private void Page_NextPageRequested(object sender, EventArgs e)
         {
             Debug.WriteLine($"{LastPage} requested to navigate forward", "Wizard");
-            NavigateToNextPage();
+            NavigateForwards();
         }
 
         #endregion Page Events
@@ -198,7 +198,7 @@ namespace Craftplacer.ClassicSuite.Wizards.Forms
 
         private void CancelButton_Click(object sender, EventArgs e) => Close();
 
-        private void NextButton_Click(object sender, EventArgs e) => NavigateToNextPage();
+        private void NextButton_Click(object sender, EventArgs e) => NavigateForwards();
 
         private void WizardForm_FormClosed(object sender, FormClosedEventArgs e)
         {
