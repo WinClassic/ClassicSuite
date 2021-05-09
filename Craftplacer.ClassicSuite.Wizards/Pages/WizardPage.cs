@@ -138,16 +138,11 @@ namespace Craftplacer.ClassicSuite.Wizards.Pages
         public WizardPage NextPage { get; set; }
 
         /// <summary>
-        /// Occurs when this page requests its parent WizardForm to show the next page.
-        /// </summary>
-        public event EventHandler<EventArgs> NextPageRequested;
-
-        /// <summary>
-        /// Raises the <see cref="NextPageRequested"/> event.
+        /// Invokes the ParentForm to navigate forward.
         /// </summary>
         protected void OnNextPageRequested()
         {
-            NextPageRequested?.Invoke(this, EventArgs.Empty);
+            ParentForm.NavigateForwards();
         }
 
         #endregion Next Page

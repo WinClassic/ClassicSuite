@@ -84,7 +84,6 @@ namespace Craftplacer.ClassicSuite.Wizards.Forms
             // Subscribe to events
             page.AllowedButtonsChanged += Page_AllowedButtonsChanged;
             page.ButtonTextChanged += Page_ButtonTextChanged;
-            page.NextPageRequested += Page_NextPageRequested;
 
             // Inform this page about the focus switch
             page.OnEnterPage();
@@ -101,7 +100,6 @@ namespace Craftplacer.ClassicSuite.Wizards.Forms
             // Unsubscribe from button changes from previous page
             page.AllowedButtonsChanged -= Page_AllowedButtonsChanged;
             page.ButtonTextChanged -= Page_ButtonTextChanged;
-            page.NextPageRequested -= Page_NextPageRequested;
         }
 
         /// <summary>
@@ -189,12 +187,6 @@ namespace Craftplacer.ClassicSuite.Wizards.Forms
             UpdateBackButton();
             UpdateNextButton();
             UpdateCancelButton();
-        }
-
-        private void Page_NextPageRequested(object sender, EventArgs e)
-        {
-            Debug.WriteLine($"{LastPage} requested to navigate forward", "Wizard");
-            NavigateForwards();
         }
 
         #endregion Page Events
