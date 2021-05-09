@@ -172,21 +172,21 @@ namespace Craftplacer.ClassicSuite.Wizards.Pages
         /// <summary>
         /// Occurs when the parent WizardForm navigates to this page.
         /// </summary>
-        public event EventHandler<EventArgs> EnterPage;
+        public event EventHandler<EventArgs> PageEnter;
 
         /// <summary>
         /// Occurs when the parent WizardForm navigates away from this page.
         /// </summary>
-        public event EventHandler<EventArgs> LeavePage;
+        public event EventHandler<EventArgs> PageLeave;
 
-        public void OnEnterPage()
+        public void OnPageEnter()
         {
-            EnterPage?.Invoke(this, EventArgs.Empty);
+            PageEnter?.Invoke(this, EventArgs.Empty);
         }
 
-        public void OnLeavePage()
+        public void OnPageLeave()
         {
-            LeavePage?.Invoke(this, EventArgs.Empty);
+            PageLeave?.Invoke(this, EventArgs.Empty);
         }
 
         #endregion Navigation Events

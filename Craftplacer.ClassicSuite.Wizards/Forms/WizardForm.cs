@@ -86,7 +86,7 @@ namespace Craftplacer.ClassicSuite.Wizards.Forms
             page.ButtonTextChanged += Page_ButtonTextChanged;
 
             // Inform this page about the focus switch
-            page.OnEnterPage();
+            page.OnPageEnter();
         }
 
         /// <summary>
@@ -95,7 +95,7 @@ namespace Craftplacer.ClassicSuite.Wizards.Forms
         private void LeavePage(WizardPage page)
         {
             Debug.WriteLine($"Leaving {page}", "Wizard");
-            page.OnLeavePage();
+            page.OnPageLeave();
 
             // Unsubscribe from button changes from previous page
             page.AllowedButtonsChanged -= Page_AllowedButtonsChanged;
