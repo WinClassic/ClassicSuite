@@ -221,7 +221,7 @@ namespace Craftplacer.ClassicSuite.Wizards.Forms
         private void UpdateBackButton()
         {
             var hasPreviousPage = pages.Count > 1;
-            var buttonAllowed = LastPage.AllowedButtons.HasFlag(AllowedButtons.Back);
+            var buttonAllowed = LastPage.AllowedButtons.HasFlag(AllowedButton.Back);
             backButton.Enabled = hasPreviousPage && buttonAllowed;
 
             if (string.IsNullOrWhiteSpace(LastPage.BackButtonText))
@@ -236,7 +236,7 @@ namespace Craftplacer.ClassicSuite.Wizards.Forms
 
         private void UpdateCancelButton()
         {
-            cancelButton.Enabled = LastPage.AllowedButtons.HasFlag(AllowedButtons.Cancel);
+            cancelButton.Enabled = LastPage.AllowedButtons.HasFlag(AllowedButton.Cancel);
 
             if (string.IsNullOrWhiteSpace(LastPage.CancelButtonText))
             {
@@ -262,7 +262,7 @@ namespace Craftplacer.ClassicSuite.Wizards.Forms
 
         private void UpdateNextButton()
         {
-            nextButton.Enabled = LastPage.AllowedButtons.HasFlag(AllowedButtons.Next);
+            nextButton.Enabled = LastPage.AllowedButtons.HasFlag(AllowedButton.Next);
 
             if (!string.IsNullOrWhiteSpace(LastPage.NextButtonText))
             {

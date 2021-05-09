@@ -181,10 +181,10 @@ namespace Craftplacer.ClassicSuite.Wizards.Pages
         /// <summary>
         /// What buttons to enable, this can be updated at runtime and can be used for asynchronous operations.
         /// </summary>
-        private AllowedButtons allowedButtons = AllowedButtons.All;
+        private AllowedButton allowedButtons = AllowedButton.All;
 
         [Category("Behavior")]
-        public virtual AllowedButtons AllowedButtons
+        public virtual AllowedButton AllowedButtons
         {
             get => allowedButtons;
             set

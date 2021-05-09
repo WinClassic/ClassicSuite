@@ -41,7 +41,7 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Enums\AllowedButtons.cs" />
+    <Compile Include="Enums\AllowedButton.cs" />
     <Compile Include="Controls\Divider.cs">
       <SubType>Component</SubType>
     </Compile>

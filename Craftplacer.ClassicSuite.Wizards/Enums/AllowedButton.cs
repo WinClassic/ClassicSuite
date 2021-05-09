@@ -3,7 +3,7 @@
 namespace Craftplacer.ClassicSuite.Wizards.Enums
 {
     [Flags]
-    public enum AllowedButtons
+    public enum AllowedButton
     {
         None = 0,
         Back,
