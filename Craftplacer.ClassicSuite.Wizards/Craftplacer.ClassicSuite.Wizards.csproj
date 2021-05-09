@@ -52,6 +52,7 @@
       <DependentUpon>PageHeader.cs</DependentUpon>
     </Compile>
     <Compile Include="Enums\WizardStyle.cs" />
+    <Compile Include="Exceptions\InvalidParentFormException.cs" />
     <Compile Include="Forms\WizardForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -86,5 +87,6 @@
     <Content Include="Resources\Wizard.ico" />
     <Content Include="Resources\Wizard.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

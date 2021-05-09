@@ -1,4 +1,5 @@
 ﻿using Craftplacer.ClassicSuite.Wizards.Enums;
+using Craftplacer.ClassicSuite.Wizards.Exceptions;
 using Craftplacer.ClassicSuite.Wizards.Forms;
 
 using System;
@@ -32,9 +33,6 @@ namespace Craftplacer.ClassicSuite.Wizards.Pages
         [Category("Appearance")]
         [Description("The text that appears in the footer beside the buttons.")]
         public virtual string FooterText { get; set; }
-
-        // This will intentionally break code if pages are put into wrong Forms.
-        public new WizardForm ParentForm => (WizardForm)base.ParentForm;
 
         #region Button Texts
 
@@ -138,11 +136,33 @@ namespace Craftplacer.ClassicSuite.Wizards.Pages
         public WizardPage NextPage { get; set; }
 
         /// <summary>
-        /// Invokes the ParentForm to navigate forward.
+        /// Invokes the ParentForm to navigate forwards.
         /// </summary>
         protected void OnNextPageRequested()
         {
-            ParentForm.NavigateForwards();
+            if (ParentForm is WizardForm wizard)
+            {
+                wizard.NavigateForwards();
+            }
+            else
+            {
+                throw new InvalidParentFormException($"The operation is invalid because the {nameof(ParentForm)} is not of type {typeof(WizardForm)}");
+            }
+        }
+
+        /// <summary>
+        /// Invokes the ParentForm to navigate backwards.
+        /// </summary>
+        protected void OnPreviousPageRequested()
+        {
+            if (ParentForm is WizardForm wizard)
+            {
+                wizard.NavigateBackwards();
+            }
+            else
+            {
+                throw new InvalidParentFormException($"The operation is invalid because the {nameof(ParentForm)} is not of type {typeof(WizardForm)}");
+            }
         }
 
         #endregion Next Page
