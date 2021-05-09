@@ -107,7 +107,7 @@ namespace Craftplacer.ClassicSuite.Wizards.Forms
         /// <summary>
         /// Navigates to the next page, this is equivalent to pressing the "Next" button.
         /// </summary>
-        private void NavigateForwards()
+        public void NavigateForwards()
         {
             Debug.WriteLine("Navigating to next page", "Wizard");
             var nextPage = LastPage.NextPage;
@@ -120,6 +120,20 @@ namespace Craftplacer.ClassicSuite.Wizards.Forms
                 LeavePage(LastPage);
                 PushPage(nextPage);
             }
+        }
+
+        /// <summary>
+        /// Navigates to the previous page, this is equivalent to pressing the "Back" button.
+        /// </summary>
+        public void NavigateBackwards()
+        {
+            if (pages.Count < 2)
+            {
+                throw new InvalidOperationException("There are not enough pages in the page stack to be able to navigate backwards.");
+            }
+
+            PopPage();
+            EnterPage(LastPage);
         }
 
         /// <summary>
@@ -191,8 +205,7 @@ namespace Craftplacer.ClassicSuite.Wizards.Forms
         {
             if (pages.Count > 0)
             {
-                PopPage();
-                EnterPage(LastPage);
+                NavigateBackwards();
             }
         }
 
