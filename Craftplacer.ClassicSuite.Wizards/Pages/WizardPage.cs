@@ -1,4 +1,5 @@
 ﻿using Craftplacer.ClassicSuite.Wizards.Enums;
+using Craftplacer.ClassicSuite.Wizards.Exceptions;
 using Craftplacer.ClassicSuite.Wizards.Forms;
 
 using System;
@@ -32,9 +33,6 @@ namespace Craftplacer.ClassicSuite.Wizards.Pages
         [Category("Appearance")]
         [Description("The text that appears in the footer beside the buttons.")]
         public virtual string FooterText { get; set; }
-
-        // This will intentionally break code if pages are put into wrong Forms.
-        public new WizardForm ParentForm => (WizardForm)base.ParentForm;
 
         #region Button Texts
 
@@ -138,16 +136,33 @@ namespace Craftplacer.ClassicSuite.Wizards.Pages
         public WizardPage NextPage { get; set; }
 
         /// <summary>
-        /// Occurs when this page requests its parent WizardForm to show the next page.
+        /// Invokes the ParentForm to navigate forwards.
         /// </summary>
-        public event EventHandler<EventArgs> NextPageRequested;
+        protected void OnNextPageRequested()
+        {
+            if (ParentForm is WizardForm wizard)
+            {
+                wizard.NavigateForwards();
+            }
+            else
+            {
+                throw new InvalidParentFormException($"The operation is invalid because the {nameof(ParentForm)} is not of type {typeof(WizardForm)}");
+            }
+        }
 
         /// <summary>
-        /// Raises the <see cref="NextPageRequested"/> event.
+        /// Invokes the ParentForm to navigate backwards.
         /// </summary>
-        public void OnNextPageRequested()
+        protected void OnPreviousPageRequested()
         {
-            NextPageRequested?.Invoke(this, EventArgs.Empty);
+            if (ParentForm is WizardForm wizard)
+            {
+                wizard.NavigateBackwards();
+            }
+            else
+            {
+                throw new InvalidParentFormException($"The operation is invalid because the {nameof(ParentForm)} is not of type {typeof(WizardForm)}");
+            }
         }
 
         #endregion Next Page
@@ -195,10 +210,10 @@ namespace Craftplacer.ClassicSuite.Wizards.Pages
         /// <summary>
         /// What buttons to enable, this can be updated at runtime and can be used for asynchronous operations.
         /// </summary>
-        private AllowedButtons allowedButtons = AllowedButtons.All;
+        private AllowedButton allowedButtons = AllowedButton.All;
 
         [Category("Behavior")]
-        public virtual AllowedButtons AllowedButtons
+        public virtual AllowedButton AllowedButtons
         {
             get => allowedButtons;
             set

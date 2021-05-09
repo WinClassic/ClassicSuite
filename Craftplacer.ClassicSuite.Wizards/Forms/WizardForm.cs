@@ -84,7 +84,6 @@ namespace Craftplacer.ClassicSuite.Wizards.Forms
             // Subscribe to events
             page.AllowedButtonsChanged += Page_AllowedButtonsChanged;
             page.ButtonTextChanged += Page_ButtonTextChanged;
-            page.NextPageRequested += Page_NextPageRequested;
 
             // Inform this page about the focus switch
             page.OnEnterPage();
@@ -101,13 +100,12 @@ namespace Craftplacer.ClassicSuite.Wizards.Forms
             // Unsubscribe from button changes from previous page
             page.AllowedButtonsChanged -= Page_AllowedButtonsChanged;
             page.ButtonTextChanged -= Page_ButtonTextChanged;
-            page.NextPageRequested -= Page_NextPageRequested;
         }
 
         /// <summary>
         /// Navigates to the next page, this is equivalent to pressing the "Next" button.
         /// </summary>
-        private void NavigateToNextPage()
+        public void NavigateForwards()
         {
             Debug.WriteLine("Navigating to next page", "Wizard");
             var nextPage = LastPage.NextPage;
@@ -120,6 +118,20 @@ namespace Craftplacer.ClassicSuite.Wizards.Forms
                 LeavePage(LastPage);
                 PushPage(nextPage);
             }
+        }
+
+        /// <summary>
+        /// Navigates to the previous page, this is equivalent to pressing the "Back" button.
+        /// </summary>
+        public void NavigateBackwards()
+        {
+            if (pages.Count < 2)
+            {
+                throw new InvalidOperationException("There are not enough pages in the page stack to be able to navigate backwards.");
+            }
+
+            PopPage();
+            EnterPage(LastPage);
         }
 
         /// <summary>
@@ -177,12 +189,6 @@ namespace Craftplacer.ClassicSuite.Wizards.Forms
             UpdateCancelButton();
         }
 
-        private void Page_NextPageRequested(object sender, EventArgs e)
-        {
-            Debug.WriteLine($"{LastPage} requested to navigate forward", "Wizard");
-            NavigateToNextPage();
-        }
-
         #endregion Page Events
 
         #region Form Events
@@ -191,8 +197,7 @@ namespace Craftplacer.ClassicSuite.Wizards.Forms
         {
             if (pages.Count > 0)
             {
-                PopPage();
-                EnterPage(LastPage);
+                NavigateBackwards();
             }
         }
 
@@ -210,7 +215,7 @@ namespace Craftplacer.ClassicSuite.Wizards.Forms
             Close();
         }
 
-        private void NextButton_Click(object sender, EventArgs e) => NavigateToNextPage();
+        private void NextButton_Click(object sender, EventArgs e) => NavigateForwards();
 
         private void WizardForm_FormClosed(object sender, FormClosedEventArgs e)
         {
@@ -233,7 +238,7 @@ namespace Craftplacer.ClassicSuite.Wizards.Forms
         private void UpdateBackButton()
         {
             var hasPreviousPage = pages.Count > 1;
-            var buttonAllowed = LastPage.AllowedButtons.HasFlag(AllowedButtons.Back);
+            var buttonAllowed = LastPage.AllowedButtons.HasFlag(AllowedButton.Back);
             backButton.Enabled = hasPreviousPage && buttonAllowed;
 
             if (string.IsNullOrWhiteSpace(LastPage.BackButtonText))
@@ -248,7 +253,7 @@ namespace Craftplacer.ClassicSuite.Wizards.Forms
 
         private void UpdateCancelButton()
         {
-            cancelButton.Enabled = LastPage.AllowedButtons.HasFlag(AllowedButtons.Cancel);
+            cancelButton.Enabled = LastPage.AllowedButtons.HasFlag(AllowedButton.Cancel);
 
             if (string.IsNullOrWhiteSpace(LastPage.CancelButtonText))
             {
@@ -274,7 +279,7 @@ namespace Craftplacer.ClassicSuite.Wizards.Forms
 
         private void UpdateNextButton()
         {
-            nextButton.Enabled = LastPage.AllowedButtons.HasFlag(AllowedButtons.Next);
+            nextButton.Enabled = LastPage.AllowedButtons.HasFlag(AllowedButton.Next);
 
             if (!string.IsNullOrWhiteSpace(LastPage.NextButtonText))
             {
