@@ -201,7 +201,19 @@ namespace Craftplacer.ClassicSuite.Wizards.Forms
             }
         }
 
-        private void CancelButton_Click(object sender, EventArgs e) => Close();
+        private void CancelButton_Click(object sender, EventArgs e)
+        {
+            CancelEventArgs args = new CancelEventArgs();
+
+            LastPage.OnCancelRequested(args);
+
+            if (args.Cancel)
+            {
+                return;
+            }
+
+            Close();
+        }
 
         private void NextButton_Click(object sender, EventArgs e) => NavigateForwards();
 
