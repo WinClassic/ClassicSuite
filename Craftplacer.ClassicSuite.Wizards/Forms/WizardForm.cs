@@ -14,18 +14,12 @@ namespace Craftplacer.ClassicSuite.Wizards.Forms
     // TODO: Add Windows 9x style, see WizardStyle.cs
     public partial class WizardForm : Form
     {
+        private readonly WizardPage initialPage;
+
         /// <summary>
         /// The navigation stack, it contains previous and current pages.
         /// </summary>
         private readonly Stack<WizardPage> pages = new Stack<WizardPage>();
-
-        private readonly WizardPage initialPage;
-
-        [Category("Appearance")]
-        public Image DefaultSidebarImage { get; set; }
-
-        [Category("Appearance")]
-        public Image DefaultHeaderImage { get; set; }
 
         public WizardForm(WizardPage initialPage)
         {
@@ -33,6 +27,17 @@ namespace Craftplacer.ClassicSuite.Wizards.Forms
             Icon = Properties.Resources.Wizard;
             this.initialPage = initialPage;
         }
+
+        [Category("Appearance")]
+        public Image DefaultHeaderImage { get; set; }
+
+        [Category("Appearance")]
+        public Image DefaultSidebarImage { get; set; }
+
+        /// <summary>
+        /// The last page in the navigation stack, this is usually the current page that the user can see.
+        /// </summary>
+        private WizardPage LastPage => pages.Peek();
 
         public static WizardForm FromList(IEnumerable<WizardPage> pages)
         {
@@ -56,12 +61,39 @@ namespace Craftplacer.ClassicSuite.Wizards.Forms
             return new WizardForm(array[0]);
         }
 
-        /// <summary>
-        /// The last page in the navigation stack, this is usually the current page that the user can see.
-        /// </summary>
-        private WizardPage LastPage => pages.Peek();
-
         #region Page Management Methods
+
+        /// <summary>
+        /// Navigates to the previous page, this is equivalent to pressing the "Back" button.
+        /// </summary>
+        public void NavigateBackwards()
+        {
+            if (pages.Count < 2)
+            {
+                throw new InvalidOperationException("There are not enough pages in the page stack to be able to navigate backwards.");
+            }
+
+            PopPage();
+            EnterPage(LastPage);
+        }
+
+        /// <summary>
+        /// Navigates to the next page, this is equivalent to pressing the "Next" button.
+        /// </summary>
+        public void NavigateForwards()
+        {
+            Debug.WriteLine("Navigating to next page", "Wizard");
+            var nextPage = LastPage.NextPage;
+            if (nextPage == null)
+            {
+                Close();
+            }
+            else
+            {
+                LeavePage(LastPage);
+                PushPage(nextPage);
+            }
+        }
 
         /// <summary>
         /// Subscribes a page and puts it into the foreground.
@@ -103,35 +135,19 @@ namespace Craftplacer.ClassicSuite.Wizards.Forms
         }
 
         /// <summary>
-        /// Navigates to the next page, this is equivalent to pressing the "Next" button.
+        /// Leaves a page and removes it from the navigation stack afterwards.
         /// </summary>
-        public void NavigateForwards()
+        private void PopPage()
         {
-            Debug.WriteLine("Navigating to next page", "Wizard");
-            var nextPage = LastPage.NextPage;
-            if (nextPage == null)
-            {
-                Close();
-            }
-            else
-            {
-                LeavePage(LastPage);
-                PushPage(nextPage);
-            }
-        }
+            var page = pages.Pop();
 
-        /// <summary>
-        /// Navigates to the previous page, this is equivalent to pressing the "Back" button.
-        /// </summary>
-        public void NavigateBackwards()
-        {
-            if (pages.Count < 2)
-            {
-                throw new InvalidOperationException("There are not enough pages in the page stack to be able to navigate backwards.");
-            }
+            LeavePage(page);
 
-            PopPage();
-            EnterPage(LastPage);
+            Debug.WriteLine($"Removing {page}", "Wizard");
+            if (pagePanel.Controls.Contains(page))
+            {
+                pagePanel.Controls.Remove(page);
+            }
         }
 
         /// <summary>
@@ -150,22 +166,6 @@ namespace Craftplacer.ClassicSuite.Wizards.Forms
             }
 
             EnterPage(page);
-        }
-
-        /// <summary>
-        /// Leaves a page and removes it from the navigation stack afterwards.
-        /// </summary>
-        private void PopPage()
-        {
-            var page = pages.Pop();
-
-            LeavePage(page);
-
-            Debug.WriteLine($"Removing {page}", "Wizard");
-            if (pagePanel.Controls.Contains(page))
-            {
-                pagePanel.Controls.Remove(page);
-            }
         }
 
         #endregion Page Management Methods
