@@ -145,7 +145,7 @@ namespace Craftplacer.ClassicSuite.Wizards.Pages
         /// <summary>
         /// Raises the <see cref="NextPageRequested"/> event.
         /// </summary>
-        protected void OnNextPageRequested()
+        public void OnNextPageRequested()
         {
             NextPageRequested?.Invoke(this, EventArgs.Empty);
         }
