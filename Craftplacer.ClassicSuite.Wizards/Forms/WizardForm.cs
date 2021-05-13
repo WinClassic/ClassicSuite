@@ -267,7 +267,7 @@ namespace Craftplacer.ClassicSuite.Wizards.Forms
 
         private void UpdateHeader(WizardPage page)
         {
-            var hasHeader = page.PageParts == PageParts.Header;
+            var hasHeader = page.PageParts == PagePart.Header;
 
             if (header.Visible = hasHeader)
             {
@@ -297,7 +297,7 @@ namespace Craftplacer.ClassicSuite.Wizards.Forms
 
         private void UpdateSidebar(WizardPage page)
         {
-            var hasSidebar = page.PageParts == PageParts.Sidebar;
+            var hasSidebar = page.PageParts == PagePart.Sidebar;
 
             if (sidebarPictureBox.Visible = hasSidebar)
             {

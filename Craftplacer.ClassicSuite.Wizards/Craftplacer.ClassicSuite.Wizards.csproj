@@ -59,7 +59,7 @@
     <Compile Include="Forms\WizardForm.Designer.cs">
       <DependentUpon>WizardForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Enums\PageParts.cs" />
+    <Compile Include="Enums\PagePart.cs" />
     <Compile Include="Pages\WizardPage.cs">
       <SubType>UserControl</SubType>
     </Compile>

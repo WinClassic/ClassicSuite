@@ -12,6 +12,7 @@ namespace Craftplacer.ClassicSuite.Wizards.Pages
     public class WizardPage : UserControl
     {
         public override DockStyle Dock => DockStyle.Fill;
+        private PagePart pageParts = PagePart.None;
 
         /// <summary>
         /// The text that appears in the footer beside the buttons.
@@ -99,7 +100,6 @@ namespace Craftplacer.ClassicSuite.Wizards.Pages
 
         #region Page Parts
 
-        private PageParts pageParts = PageParts.None;
 
         /// <summary>
         /// The image that will be displayed in the header.
@@ -111,9 +111,9 @@ namespace Craftplacer.ClassicSuite.Wizards.Pages
         /// What extra parts to show, this can range from sidebar imagery to a small header displaying the title.
         /// </summary>
         [Category("Appearance")]
-        [DefaultValue(PageParts.None)]
+        [DefaultValue(PagePart.None)]
         [Description("What extra parts to show, this can range from sidebar imagery to a small header displaying the title.")]
-        public PageParts PageParts
+        public PagePart PageParts
         {
             get => pageParts;
             set
@@ -261,10 +261,10 @@ namespace Craftplacer.ClassicSuite.Wizards.Pages
         {
             switch (PageParts)
             {
-                case PageParts.Header:
+                case PagePart.Header:
                     return new Size(497, 253);
 
-                case PageParts.Sidebar:
+                case PagePart.Sidebar:
                     return new Size(333, 313);
 
                 default:

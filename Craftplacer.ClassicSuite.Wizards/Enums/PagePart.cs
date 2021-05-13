@@ -1,6 +1,6 @@
 ﻿namespace Craftplacer.ClassicSuite.Wizards.Enums
 {
-    public enum PageParts
+    public enum PagePart
     {
         None = 0,
         Sidebar,
