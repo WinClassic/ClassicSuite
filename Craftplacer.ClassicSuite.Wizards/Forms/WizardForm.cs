@@ -11,7 +11,6 @@ using System.Windows.Forms;
 
 namespace Craftplacer.ClassicSuite.Wizards.Forms
 {
-    // TODO: Add Windows 9x style, see WizardStyle.cs
     public partial class WizardForm : Form
     {
         private readonly WizardPage initialPage;
@@ -28,9 +27,15 @@ namespace Craftplacer.ClassicSuite.Wizards.Forms
             this.initialPage = initialPage;
         }
 
+        /// <summary>
+        /// Default image used for pages that have their <see cref="WizardPage.PageParts"/> set to <see cref="PagePart.Header"/>.
+        /// </summary>
         [Category("Appearance")]
         public Image DefaultHeaderImage { get; set; }
 
+        /// <summary>
+        /// Default image used for pages that have their <see cref="WizardPage.PageParts"/> set to <see cref="PagePart.Sidebar"/>.
+        /// </summary>
         [Category("Appearance")]
         public Image DefaultSidebarImage { get; set; }
 
@@ -60,8 +65,6 @@ namespace Craftplacer.ClassicSuite.Wizards.Forms
 
             return new WizardForm(array[0]);
         }
-
-        #region Page Management Methods
 
         /// <summary>
         /// Navigates to the previous page, this is equivalent to pressing the "Back" button.
@@ -93,6 +96,28 @@ namespace Craftplacer.ClassicSuite.Wizards.Forms
                 LeavePage(LastPage);
                 PushPage(nextPage);
             }
+        }
+
+        private void BackButton_Click(object sender, EventArgs e)
+        {
+            if (pages.Count > 0)
+            {
+                NavigateBackwards();
+            }
+        }
+
+        private void CancelButton_Click(object sender, EventArgs e)
+        {
+            CancelEventArgs args = new CancelEventArgs();
+
+            LastPage.OnCancelRequested(args);
+
+            if (args.Cancel)
+            {
+                return;
+            }
+
+            Close();
         }
 
         /// <summary>
@@ -134,6 +159,18 @@ namespace Craftplacer.ClassicSuite.Wizards.Forms
             page.ButtonTextChanged -= Page_ButtonTextChanged;
         }
 
+        private void NextButton_Click(object sender, EventArgs e) => NavigateForwards();
+
+        private void Page_AllowedButtonsChanged(object sender, EventArgs e)
+        {
+            UpdateButtons();
+        }
+
+        private void Page_ButtonTextChanged(object sender, EventArgs e)
+        {
+            UpdateButtons();
+        }
+
         /// <summary>
         /// Leaves a page and removes it from the navigation stack afterwards.
         /// </summary>
@@ -168,73 +205,6 @@ namespace Craftplacer.ClassicSuite.Wizards.Forms
             EnterPage(page);
         }
 
-        #endregion Page Management Methods
-
-        #region Page Events
-
-        private void Page_AllowedButtonsChanged(object sender, EventArgs e)
-        {
-            UpdateButtons();
-        }
-
-        private void Page_ButtonTextChanged(object sender, EventArgs e)
-        {
-            UpdateButtons();
-        }
-
-        private void UpdateButtons()
-        {
-            UpdateBackButton();
-            UpdateNextButton();
-            UpdateCancelButton();
-        }
-
-        #endregion Page Events
-
-        #region Form Events
-
-        private void BackButton_Click(object sender, EventArgs e)
-        {
-            if (pages.Count > 0)
-            {
-                NavigateBackwards();
-            }
-        }
-
-        private void CancelButton_Click(object sender, EventArgs e)
-        {
-            CancelEventArgs args = new CancelEventArgs();
-
-            LastPage.OnCancelRequested(args);
-
-            if (args.Cancel)
-            {
-                return;
-            }
-
-            Close();
-        }
-
-        private void NextButton_Click(object sender, EventArgs e) => NavigateForwards();
-
-        private void WizardForm_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            // Clean up..?
-            while (pages.Count > 0)
-            {
-                PopPage();
-            }
-        }
-
-        private void WizardForm_Load(object sender, EventArgs e)
-        {
-            PushPage(initialPage);
-        }
-
-        #endregion Form Events
-
-        #region Update Methods
-
         private void UpdateBackButton()
         {
             var hasPreviousPage = pages.Count > 1;
@@ -249,6 +219,13 @@ namespace Craftplacer.ClassicSuite.Wizards.Forms
             {
                 cancelButton.Text = LastPage.BackButtonText;
             }
+        }
+
+        private void UpdateButtons()
+        {
+            UpdateBackButton();
+            UpdateNextButton();
+            UpdateCancelButton();
         }
 
         private void UpdateCancelButton()
@@ -305,6 +282,18 @@ namespace Craftplacer.ClassicSuite.Wizards.Forms
             }
         }
 
-        #endregion Update Methods
+        private void WizardForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            // Clean up..?
+            while (pages.Count > 0)
+            {
+                PopPage();
+            }
+        }
+
+        private void WizardForm_Load(object sender, EventArgs e)
+        {
+            PushPage(initialPage);
+        }
     }
 }
